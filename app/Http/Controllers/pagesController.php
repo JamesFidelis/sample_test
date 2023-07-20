@@ -16,11 +16,11 @@ class pagesController extends Controller
 
 
     public function Login(){
-        return view('pages.login');
+        return view('auth.login');
     }
 
     public function Register(){
-        return view('pages.register');
+        return view('auth.register');
     }
 
     public function gotoProfile(){
