@@ -40,7 +40,7 @@
                 @endif
 
                 <x-button class="ml-4">
-                    {{ __('Log in') }}
+                    {{ route('home')}}
                 </x-button>
             </div>
         </form>

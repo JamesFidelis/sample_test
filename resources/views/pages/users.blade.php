@@ -1,27 +1,33 @@
 @extends('layouts.main')
 
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          Hi, {{Auth::user()->name}}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
+@section('title')
+
+    <title>Users</title>
+
+@endsection
 
 
-        <div class="container">
+@section('body')
+    @include('repeats.header')
+    @include('repeats.sidebar')
 
+
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Users Data</h1>
+        </div><!-- End Page Title -->
+
+        <section class="section">
             <div class="row">
-
-
-                <div class="col-lg-11">
+                <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Users Table</h5>
+                            <h5 class="card-title">Users</h5>
 
-                            <!-- Table with stripped rows -->
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
@@ -38,22 +44,24 @@
                                         <th scope="row">{{$i++}}</th>
                                         <td>{{$user->name }}</td>
                                         <td>{{$user->email }}</td>
-{{--           only use this code if you are not usig the query builder                             <td>{{$user->created_at->diffForHumans() }}</td>--}}
-                                        <td>{{Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</td>
+                                        <td>{{$user->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <!-- End Table with stripped rows -->
 
                         </div>
                     </div>
 
-
                 </div>
-
             </div>
+        </section>
 
-        </div>
+    </main><!-- End #main -->
 
-</x-app-layout>
+
+
+    @include('repeats.footer')
+
+
+@endsection

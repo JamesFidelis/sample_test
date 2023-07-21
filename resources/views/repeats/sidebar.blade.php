@@ -3,11 +3,23 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="{{route('home')}}">
+            <a class="nav-link" href="{{route('home')}}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
         </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('users')}}">
+                <i class="bi bi-person-circle"></i>
+                <span>Users</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('categories')}}">
+                <i class="bi bi-list"></i>
+                <span>Categories</span>
+            </a>
+        </li>
 
         <li class="nav-heading">Pages</li>
 

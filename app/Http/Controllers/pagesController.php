@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class pagesController extends Controller
 {
@@ -34,5 +39,55 @@ class pagesController extends Controller
     }
     public function gotoContact(){
         return view('pages.contact');
+    }
+    public function gotoUsers(){
+        $users = User::latest()->get();
+        return view('pages.users',compact('users'));
+    }
+    public function gotoCategories(){
+        //to get latest data first
+        $categories = Categories::latest()->get();
+        //if needed to keep in pages
+//        $categories = DB::table('categories')->latest()->paginate(5);
+        return view('pages.categories',compact('categories'));
+    }
+
+    public function addCategory(Request $request){
+
+
+        //here we validate the data
+        $validated = $request->validate([
+            'category_name' => 'required|unique:categories|max:255'
+        ]);
+
+
+        //below shows the eloquent orm ways to add data
+
+//        Categories::insert(
+//            [
+//                'category_name'=>$request->category_name,
+//                'user_id'=> Auth::user()->id,
+//                'created_at' => Carbon::now()
+//            ]
+//        );
+
+        //this below automatically provides the created at and updated at dates
+        $category = new Categories();
+        $category->category_name = $request->category_name;
+        $category->user_id =Auth::user()->id;
+        $category->save();
+
+
+
+        //below uses the query builder method
+//        $adding = array();
+//        $adding['category_name']= $request->category_name;
+//        $adding['user_id']= Auth::user()->id;
+//        DB::table('categories')->insert($adding);
+
+
+//        return view('pages.categories',compact('categories')).with('success','Category has been added Successfully');
+        return Redirect()->back()->with('success','Category has been added Successfully');
+
     }
 }

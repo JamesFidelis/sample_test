@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\pagesController;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('home');
 })->name('home');
 
 Route::get('/componentAlert',[pagesController::class,'componentAlert']);
@@ -35,13 +37,25 @@ Route::get('/faq',[pagesController::class,'gotoFAQ'])->name('faq');
 Route::get('/contact',[pagesController::class,'gotoContact'])->name('contact');
 
 
+Route::get('/users',[pagesController::class,'gotoUsers'])->name('users');
+
+
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
     Route::get('/dashboard', function () {
-        return view('dashboard');
+//        $users = User::all();
+
+//        below is the query builder example
+        $users = DB::table('users')->latest()->get();
+        return view('dashboard',compact('users'));
     })->name('dashboard');
 });
+
+
+Route::get('/categories',[pagesController::class,'gotoCategories'])->name('categories');
+Route::post('/categories',[pagesController::class,'addCategory'])->name('add_categories');
