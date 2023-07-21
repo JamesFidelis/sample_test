@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/',[pagesController::class,'Login'])->name('home');
 
 Route::get('/componentAlert',[pagesController::class,'componentAlert']);
 
@@ -55,7 +53,7 @@ Route::middleware([
 
 //        below is the query builder example
         $users = DB::table('users')->latest()->get();
-        return view('dashboard',compact('users'));
+        return view('home',compact('users'));
     })->name('dashboard');
 });
 
