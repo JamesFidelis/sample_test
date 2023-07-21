@@ -59,3 +59,6 @@ Route::middleware([
 
 Route::get('/categories',[pagesController::class,'gotoCategories'])->name('categories');
 Route::post('/categories',[pagesController::class,'addCategory'])->name('add_categories');
+Route::post('/update-category/{id}',[pagesController::class,'updateCategory'])->name('update_category');
+Route::get('/softdelete-category/{id}',[pagesController::class,'softDelete'])->name('update_category');
+Route::get('/edit-category/{id}',[pagesController::class,'editCategory']);

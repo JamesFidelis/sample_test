@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use function League\Flysystem\delete;
 
 class pagesController extends Controller
 {
@@ -45,11 +46,21 @@ class pagesController extends Controller
         return view('pages.users',compact('users'));
     }
     public function gotoCategories(){
+
+        //query builder to create a relationship for users and categories
+//        $categories = DB::table('categories')
+//            ->join('users','categories.user_id','users.id')
+//            ->select('categories.*','users.name')
+//            ->latest()->get();
+
+
+
         //to get latest data first
         $categories = Categories::latest()->get();
+        $trashCategory = Categories::onlyTrashed()->latest()->get();
         //if needed to keep in pages
 //        $categories = DB::table('categories')->latest()->paginate(5);
-        return view('pages.categories',compact('categories'));
+        return view('pages.categories',compact('categories','trashCategory'));
     }
 
     public function addCategory(Request $request){
@@ -89,5 +100,56 @@ class pagesController extends Controller
 //        return view('pages.categories',compact('categories')).with('success','Category has been added Successfully');
         return Redirect()->back()->with('success','Category has been added Successfully');
 
+    }
+
+
+
+    public function editCategory($id){
+//by using orm
+//        $categories = Categories::find($id);
+
+        //by using query builder
+        $categories = DB::table('categories')->where('id',$id)->first();
+        return view('pages.editCategory',compact('categories'));
+    }
+
+    public function updateCategory(Request $request,$id){
+
+
+        //here we validate the data
+        $validated = $request->validate([
+            'category_name' => 'required|unique:categories|max:255'
+        ]);
+
+
+
+        //by using orm
+//        Categories::find($id)->update(
+//            [
+//                'category_name'=>$request->category_name,
+//                'user_id'=> Auth::user()->id,
+//                'updated_at' => Carbon::now()
+//            ]
+//        );
+
+        //by using query builder
+
+         DB::table('categories')->where('id',$id)->update(
+            [
+                'category_name'=>$request->category_name,
+                'user_id'=> Auth::user()->id,
+                'updated_at' => Carbon::now()
+            ]
+        );
+
+
+        return Redirect()->route('categories')->with('success','Category has been Updated  Successfully');
+
+    }
+
+    public function softDelete($id){
+        $delete = Categories::find($id)->delete();
+
+        return Redirect()->back()->with('success','Category has successfully been added to trash');
     }
 }
