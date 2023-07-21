@@ -35,7 +35,7 @@
                         <div class="card-body">
                             <h5 class="card-title">All Categories</h5>
 
-                            <table class="table table-striped">
+                            <table class="table table-striped datatable">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -86,7 +86,7 @@
                             <form class="row g-3" action="{{ route('add_categories')  }}" method="POST">
                                 @csrf
                                 <div class="col-12">
-                                    <label for="inputEmail4" class="form-label">Category</label>
+                                    <label for="inputEmail4" class="form-label">Category Name</label>
                                     <input type="text" class="form-control" id="inputEmail4" name="category_name">
                                     @error('category_name')
 
@@ -146,7 +146,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{url('softdelete-category/'.$category->id)}}" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('restore-category/'.$category->id)}}" class="btn btn-success">Restore</a>
+                                            <a href="{{url('delete-category/'.$category->id)}}" class="btn btn-danger">Delete</a>
 
                                         </td>
                                     </tr>

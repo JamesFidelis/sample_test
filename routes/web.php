@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\pagesController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +43,7 @@ Route::get('/users',[pagesController::class,'gotoUsers'])->name('users');
 
 
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -57,8 +60,16 @@ Route::middleware([
 });
 
 
-Route::get('/categories',[pagesController::class,'gotoCategories'])->name('categories');
-Route::post('/categories',[pagesController::class,'addCategory'])->name('add_categories');
-Route::post('/update-category/{id}',[pagesController::class,'updateCategory'])->name('update_category');
-Route::get('/softdelete-category/{id}',[pagesController::class,'softDelete'])->name('update_category');
-Route::get('/edit-category/{id}',[pagesController::class,'editCategory']);
+//TODO: CATEGORIES ROUTES
+Route::get('/categories',[CategoryController::class,'gotoCategories'])->name('categories');
+Route::post('/categories',[CategoryController::class,'addCategory'])->name('add_categories');
+Route::post('/update-category/{id}',[CategoryController::class,'updateCategory'])->name('update_category');
+Route::get('/softdelete-category/{id}',[CategoryController::class,'softDelete'])->name('softDelete_category');
+Route::get('/restore-category/{id}',[CategoryController::class,'restoreCategory'])->name('restore_category');
+Route::get('/delete-category/{id}',[CategoryController::class,'permanentDelete'])->name('delete_category');
+Route::get('/edit-category/{id}',[CategoryController::class,'editCategory']);
+
+
+
+//TODO: BRAND CONTROLLER
+Route::get('/brand',[BrandController::class,'gotoBrand'])->name('brand');

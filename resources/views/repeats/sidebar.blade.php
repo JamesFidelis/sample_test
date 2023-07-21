@@ -20,6 +20,12 @@
                 <span>Categories</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('brand')}}">
+                <i class="bi bi-type"></i>
+                <span>Brands</span>
+            </a>
+        </li>
 
         <li class="nav-heading">Pages</li>
 

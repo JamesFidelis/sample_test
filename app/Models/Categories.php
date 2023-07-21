@@ -11,8 +11,7 @@ class Categories extends Model
     use SoftDeletes;
     protected $fillable = [
         'user_id',
-        'category_name',
-        'password',
+        'category_name'
     ];
 
     public function user(){
