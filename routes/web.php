@@ -3,7 +3,6 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\pagesController;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +48,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/dashboard', function () {
+        //ORM EXAMPLE BELOW
 //        $users = User::all();
 
 //        below is the query builder example
@@ -71,3 +71,12 @@ Route::get('/edit-category/{id}',[CategoryController::class,'editCategory']);
 
 //TODO: BRAND CONTROLLER
 Route::get('/brand',[BrandController::class,'gotoBrand'])->name('brand');
+Route::post('/brand',[BrandController::class,'addBrand'])->name('add_brand');
+Route::get('/edit-brand/{id}',[BrandController::class,'editBrand']);
+Route::post('/update-brand/{id}',[BrandController::class,'updateBrand'])->name('update_brand');
+Route::get('delete-brand/{id}',[BrandController::class,'permanentDelete'])->name('delete_category');
+
+
+//TODO: Mulitiple pictures
+Route::get('/all/pictures',[BrandController::class,'gotoMultipic'])->name('allPics');
+Route::post('/add/pictures',[BrandController::class,'storeImages'])->name('storeImages');

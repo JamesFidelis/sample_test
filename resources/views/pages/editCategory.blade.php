@@ -9,7 +9,6 @@
 
 
 @section('body')
-
     @include('repeats.header')
     @include('repeats.sidebar')
 

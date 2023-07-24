@@ -26,6 +26,12 @@
                 <span>Brands</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('allPics')}}">
+                <i class="bi bi-image-alt"></i>
+                <span>Pictures</span>
+            </a>
+        </li>
 
         <li class="nav-heading">Pages</li>
 

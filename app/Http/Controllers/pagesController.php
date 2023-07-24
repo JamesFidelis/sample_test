@@ -30,7 +30,7 @@ class pagesController extends Controller
     }
 
     public function gotoProfile(){
-        return view('pages.profile');
+        return view('profile.show');
     }
     public function notFound(){
         return view('pages.errorpage');

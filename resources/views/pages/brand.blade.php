@@ -20,7 +20,13 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-8">
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <p>{{session('success')}}.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"/>
 
+                        </div>
+                    @endif
                     <div class="card">
                         <div class="card-body">
                             <!-- Table with stripped rows -->
@@ -40,7 +46,7 @@
                                     <tr>
                                         <th scope="row">{{$i++}}</th>
                                         <td>{{$brand->brand_name }}</td>
-                                        <td><img src="" alt="image"/></td>
+                                        <td><img src="{{$brand->brand_image}}" alt="image" width="60" height="100"/></td>
                                         <td>
                                             @if($brand->created_at == NULL)
                                                 <span class="text-danger"> No Date Given</span>
@@ -50,7 +56,7 @@
                                         </td>
                                         <td>
                                             <a href="{{url('edit-brand/'.$brand->id)}}" class="btn btn-info">Edit</a>
-                                            <a href="{{url('softdelete-brand/'.$brand->id)}}" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('delete-brand/'.$brand->id)}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
 
                                         </td>
                                     </tr>
@@ -69,7 +75,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Add Brand</h5>
 
-                            <form class="row g-3" action="{{ route('add_categories')  }}" method="POST">
+                            <form class="row g-3" action="{{ route('add_brand')  }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
                                     <label for="inputEmail4" class="form-label">Brand Name</label>
