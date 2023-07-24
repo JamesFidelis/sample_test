@@ -227,14 +227,10 @@
                     </li>
 
                     <li>
-                        <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('login') }}"
-                                             @click.prevent="$root.submit();">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                            </a>
-                        </form>
+                        <a class="dropdown-item d-flex align-items-center" href="{{route('user.logout')}}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
                     </li>
 
                 </ul><!-- End Profile Dropdown Items -->

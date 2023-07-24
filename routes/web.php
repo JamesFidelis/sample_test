@@ -21,7 +21,8 @@ Route::get('/',[pagesController::class,'Login'])->name('home');
 
 Route::get('/componentAlert',[pagesController::class,'componentAlert']);
 
-Route::get('/login',[pagesController::class, 'Login'])->name('login');
+//Route::get('/login',[pagesController::class, 'Login'])->name('login');
+
 
 //use the name to define route name
 
@@ -80,3 +81,8 @@ Route::get('delete-brand/{id}',[BrandController::class,'permanentDelete'])->name
 //TODO: Mulitiple pictures
 Route::get('/all/pictures',[BrandController::class,'gotoMultipic'])->name('allPics');
 Route::post('/add/pictures',[BrandController::class,'storeImages'])->name('storeImages');
+
+
+//Custom Dashboard
+Route::get('/user/logout',[pagesController::class,'Logout'])->name('user.logout');
+//Route::get('/user/login',[pagesController::class, 'gotoLogin'])->name('user.login');
