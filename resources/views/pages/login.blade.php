@@ -38,10 +38,18 @@
                                     <form class="row g-3 needs-validation" action="{{route('user.login')}}" method="POST">
 
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Username</label>
+                                            <label for="yourUsername" class="form-label">Email</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="email" class="form-control" placeholder="Email" required>
+
+                                                    <div class="alert-danger">
+                                                        @if(session('errors'))
+                                                        @endif
+                                                    </div>
+
+
+
                                                 <div class="invalid-feedback">Please enter your Email.</div>
                                             </div>
                                         </div>
@@ -49,6 +57,11 @@
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
                                             <input type="password" name="password" class="form-control" placeholder="password" required>
+
+                                                @if(session('error'))
+                                                <div class="alert-danger"> {{$message}}</div>
+                                                @endif
+
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
 
@@ -63,6 +76,11 @@
                                         </div>
                                         <div class="col-12">
                                             <p class="small mb-0">Don't have account? <a href="{{ route('register') }}">Create an account</a></p>
+                                        </div>
+                                        <div class="col-12">
+                                                <a  href="{{ route('password.request') }}">
+                                                    Forgot Password?
+                                                </a>
                                         </div>
                                     </form>
 

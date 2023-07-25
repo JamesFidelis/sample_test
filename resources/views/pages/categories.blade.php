@@ -30,6 +30,14 @@
 
                     </div>
                     @endif
+                        @if(session('errors'))
+                            @error('category_name')
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p>{{$message}}</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"/>
+                            </div>
+                            @enderror
+                        @endif
 
                     <div class="card">
                         <div class="card-body">
@@ -77,29 +85,10 @@
                     </div>
 
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-2">
 
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Add Category</h5>
-
-                            <form class="row g-3" action="{{ route('add_categories')  }}" method="POST">
-                                @csrf
-                                <div class="col-12">
-                                    <label for="inputEmail4" class="form-label">Category Name</label>
-                                    <input type="text" class="form-control" id="inputEmail4" name="category_name">
-                                    @error('category_name')
-
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-                                </div>
-                            </form>
-
-                        </div>
+                    <div class="card-body">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary"> Add Category</a>
                     </div>
 
 
@@ -107,14 +96,6 @@
             </div>
             <div class="row">
                 <div class="col-lg-8">
-{{--                    @if(session('successD'))--}}
-{{--                        <div class="alert alert-success alert-dismissible fade show" role="alert">--}}
-{{--                            <p>{{session('successD')}}.</p>--}}
-{{--                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"/>--}}
-
-{{--                        </div>--}}
-{{--                    @endif--}}
-
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Trashed Categories</h5>
@@ -163,6 +144,41 @@
                 </div>
             </div>
         </section>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="card-title">Add Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+
+                            <form class="row g-3" action="{{ route('add_categories')  }}" method="POST">
+                                @csrf
+                                <div class="col-12">
+                                    <label for="inputEmail4" class="form-label">Category Name</label>
+                                    <input type="text" class="form-control" id="inputEmail4" name="category_name">
+{{--                                    @error('category_name')--}}
+
+{{--                                    <span class="text-danger">{{$message}}</span>--}}
+{{--                                    @enderror--}}
+                                </div>
+                                <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" >Submit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main><!-- End #main -->
 

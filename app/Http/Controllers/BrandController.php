@@ -60,7 +60,15 @@ class BrandController extends Controller
           'created_at'=> Carbon::now()
       ]);
 
+
+//      $notification = array(
+//          'message'=>'Brand Uploaded Successfully',
+//          'alert-type'=>'success'
+//      );
+
+
       return Redirect()->back()->with('success','Brand Uploaded Successfully');
+//      return Redirect()->back()->with($notification);
     }
 
 

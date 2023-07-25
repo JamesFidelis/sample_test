@@ -26,7 +26,11 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Users</h5>
+                            <div class="row">
+                                <div class="col-1">  <h5 class="card-title">Users </h5></div>
+                                <div class="col-md-2 mt-2"> <span class="btn btn-info">{{$users->count()}}</span></div>
+                            </div>
+
 
                             <table class="table table-striped">
                                 <thead>

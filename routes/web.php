@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\pagesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[pagesController::class,'Login'])->name('home');
-
-Route::get('/componentAlert',[pagesController::class,'componentAlert']);
-
-//Route::get('/login',[pagesController::class, 'Login'])->name('login');
-
 
 //use the name to define route name
 
-Route::get('/register',[pagesController::class,'Register'])->name('register');
+//Route::get('/register',[pagesController::class,'Register'])->name('register');
 
 Route::get('/profile',[pagesController::class,'gotoProfile'])->name('profile');
 
@@ -38,7 +33,6 @@ Route::get('/contact',[pagesController::class,'gotoContact'])->name('contact');
 
 
 Route::get('/users',[pagesController::class,'gotoUsers'])->name('users');
-
 
 
 
@@ -85,4 +79,7 @@ Route::post('/add/pictures',[BrandController::class,'storeImages'])->name('store
 
 //Custom Dashboard
 Route::get('/user/logout',[pagesController::class,'Logout'])->name('user.logout');
+Route::get('/',[pagesController::class,'gotoLogin'])->name('home');
+Route::post('/password/update',[pagesController::class,'updatePassword'])->name('update.password');
+Route::post('/profile/update',[pagesController::class,'profileUpdate'])->name('update.user.profile');
 //Route::get('/user/login',[pagesController::class, 'gotoLogin'])->name('user.login');
