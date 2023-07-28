@@ -67,8 +67,8 @@ class BrandController extends Controller
 //      );
 
 
-      return Redirect()->back()->with('success','Brand Uploaded Successfully');
-//      return Redirect()->back()->with($notification);
+      return redirect()->back()->with('success','Brand Uploaded Successfully');
+//      return redirect()->back()->with($notification);
     }
 
 
@@ -119,7 +119,7 @@ class BrandController extends Controller
                 ]
             );
 
-            return Redirect()->route('brand')->with('success','Brand Updated  Successfully');
+            return redirect()->route('brand')->with('success','Brand Updated  Successfully');
         }
 
 
@@ -147,17 +147,18 @@ class BrandController extends Controller
 
     public function storeImages(Request $request){
 
-//        $validated = $request->validate([
-//            'image' => 'required|mimes:jpg.jpeg,png',
-//        ]
-//        );
+        $validated = $request->validate([
+            'image' => 'required',
+        ]
+        );
 
         $selectedPictures = $request->file('image');
+        $upload_location = 'images/pictures/';
 
 
         foreach ($selectedPictures as $multiImage){
 
-            $upload_location = 'images/pictures/';
+
             $unique_name = hexdec(uniqid()).'.'.$multiImage->getClientOriginalExtension();
             Image::make($multiImage)->resize(100,200)->save($upload_location.$unique_name);
             $final_name= $upload_location.$unique_name;
@@ -179,7 +180,7 @@ class BrandController extends Controller
 
 
 
-        return Redirect()->back()->with('success','Pictures Uploaded Successfully');
+        return redirect()->back()->with('success','Pictures Uploaded Successfully');
 
     }
 
